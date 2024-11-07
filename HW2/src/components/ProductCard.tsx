@@ -23,16 +23,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     return (
         <div className='product-card' onClick={onCardClick}>
             <div className='product-image'>
-                {imageUrl ? <img src={imageUrl} alt={name} /> : <div className='product-without-image'>No Image</div>}
+                {imageUrl ? <img src={ imageUrl } alt={ name } /> : <div className='product-without-image'>No Image</div>}
             </div>
             <div className='product-info'>
-                <h2 className='product-name'>{name}</h2>
+                <h2 className='product-name'>{ name }</h2>
                 <div>
                     <p className='product-description'>
-                        { description! }
+                        { description }
                     </p>
-                    <p className='product-category'>Категория: {category}</p>
-                    <p className='product-quantity'>Количество: {quantity} {unit}</p>
+                    {category ? <p className='product-category'>Категория: { category }</p> : <p> </p>}
+                    <p className='product-quantity'>Количество: { quantity } { unit }</p>
                 </div>
             </div>
         </div>
