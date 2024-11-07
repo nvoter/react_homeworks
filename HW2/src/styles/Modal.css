@@ -26,9 +26,11 @@
   padding: 20px;
   width: 400px;
   max-width: 90%;
+  max-height: 50%;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
+  overflow: auto;
 }
 
 .modal-close-button {
