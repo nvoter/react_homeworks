@@ -1,6 +1,6 @@
 import react from 'react';
 import { IconType } from 'react-icons';
-import styles from '../styles/NavigationBar.css';
+import '../styles/NavigationBar.css';
 
 interface NavigationBarButtonProps {
     label: string;
