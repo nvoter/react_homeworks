@@ -12,14 +12,14 @@
 }
 
 :root {
-  --navbar-gradient: linear-gradient(135deg, #e0c3fc, #8ec5fc);
-  --button-text-color: #4a4a4a;
+  --navbar-gradient: linear-gradient(135deg, #b3cbfb, #94b6f7);
+  --button-text-color: #3a3a3a;
   --focused-text-color: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --navbar-gradient: linear-gradient(135deg, #4a4a6a, #34345a);
+    --navbar-gradient: linear-gradient(135deg, #373e68, #181861);
     --button-text-color: #e0e0e0;
     --focused-text-color: #ffffff;
   }

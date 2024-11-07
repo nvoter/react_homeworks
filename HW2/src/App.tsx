@@ -1,14 +1,18 @@
+import { useState } from 'react';
 import { NavigationBar } from './components/NavigationBar'
 import { ProductList } from './components/ProductList'
 
 function App() {
+  const [isMenuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+      setMenuVisible(!isMenuVisible);
+  };
+
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <NavigationBar/>
-      <div style={{ padding: '20px'}}>
-          <h1 style={{paddingTop: '60px'}}>Товары</h1>
-          <ProductList />
-      </div>
+      <NavigationBar onMenuToggle={toggleMenu}/>
+      <ProductList isMenuVisible={ isMenuVisible } toggleMenu={toggleMenu}/>
     </div>
   )
 }

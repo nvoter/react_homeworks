@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ProductCard } from './ProductCard.tsx';
 import { Modal } from './Modal.tsx';
+import { SideMenu } from './SideMenu.tsx';
 import '../styles/ProductList.css'
 
-interface Product {
+export interface Product {
     name: string;
     description: string;
     category: string;
@@ -12,7 +13,12 @@ interface Product {
     imageUrl?: string;
 }
 
-export const ProductList: React.FC = () => {
+interface ProductListProps {
+    isMenuVisible: boolean;
+    toggleMenu: () => void;
+}
+
+export const ProductList: React.FC<ProductListProps> = ({ isMenuVisible, toggleMenu }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
@@ -33,7 +39,9 @@ export const ProductList: React.FC = () => {
 
     return (
         <div>
-            <div className='product-list'>
+            <SideMenu products={ products } isVisible={isMenuVisible} onClose={toggleMenu}/>
+            <h1 style={{paddingLeft: '20px', marginLeft: isMenuVisible ? '300px' : '0', marginTop: isMenuVisible ? '110px' : '0px', transition: 'margin-left 0.3s ease-in-out'}}>Товары</h1>
+            <div className='product-list' style={{marginLeft: isMenuVisible ? '300px' : '0'}}>
                 {products.map((product, index) => (
                     <ProductCard
                         key={index}

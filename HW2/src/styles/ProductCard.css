@@ -1,12 +1,12 @@
 :root {
-  --focused-border: #8ec5fc;
-  --image-background: #f0f0f0;
+  --focused-border:#94b6f7;
+  --image-background: #f2f2f2;
   --subtitle-color: #777;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --focused-border: #525275;
+    --focused-border: #373e68;
     --image-background: #313030;
     --subtitle-color: #b2b2b2;
   }
@@ -71,11 +71,11 @@
   font-size: 13px;
   color: var(--subtitle-color);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 3em;
+  height: 4.5em;
 }
 
 .product-category {
