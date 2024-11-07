@@ -24,9 +24,9 @@
 .modal {
   background-color: var(--modal-background);
   padding: 20px;
-  width: 400px;
+  width: 800px;
   max-width: 90%;
-  max-height: 50%;
+  max-height: 500px;;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;

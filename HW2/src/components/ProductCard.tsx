@@ -23,7 +23,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     return (
         <div className='product-card' onClick={onCardClick}>
             <div className='product-image'>
-                {imageUrl ? <img src={ imageUrl } alt={ name } /> : <div className='product-without-image'>No Image</div>}
+                {imageUrl ? <img src={ imageUrl } alt={ name } /> : <div style={{height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>No Image</div>}
             </div>
             <div className='product-info'>
                 <h2 className='product-name'>{ name }</h2>

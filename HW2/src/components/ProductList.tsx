@@ -41,7 +41,7 @@ export const ProductList: React.FC<ProductListProps> = ({ isMenuVisible, toggleM
         <div>
             <SideMenu products={ products } isVisible={isMenuVisible} onClose={toggleMenu}/>
             <h1 style={{paddingLeft: '20px', marginLeft: isMenuVisible ? '300px' : '0', marginTop: isMenuVisible ? '110px' : '0px', transition: 'margin-left 0.3s ease-in-out'}}>Товары</h1>
-            <div className='product-list' style={{marginLeft: isMenuVisible ? '300px' : '0'}}>
+            <div className='product-list' style={{marginLeft: isMenuVisible ? '300px' : '20px'}}>
                 {products.map((product, index) => (
                     <ProductCard
                         key={index}
