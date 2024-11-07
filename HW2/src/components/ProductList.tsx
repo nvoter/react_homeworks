@@ -52,8 +52,8 @@ export const ProductList: React.FC = () => {
                 {selectedProduct && (
                     <div>
                         <h2>{selectedProduct.name}</h2>
-                        <p><strong>Описание:</strong> {selectedProduct.description}</p>
-                        <p><strong>Категория:</strong> {selectedProduct.category}</p>
+                        {selectedProduct.description ? <p><strong>Описание:</strong> {selectedProduct.description}</p> : <p> </p>}
+                        {selectedProduct.category ? <p><strong>Категория:</strong> {selectedProduct.category}</p> : <p> </p>}
                         <p><strong>Количество:</strong> {selectedProduct.quantity} {selectedProduct.unit}</p>
                     </div>
                 )}
