@@ -24,10 +24,13 @@
   align-items: center;
   box-sizing: border-box;
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
   border: 1px solid var(--focused-border);
+  box-shadow: 1px 1px 10px var(--focused-border);
+  transform: scale(1.01);
 }
 
 .product-image {

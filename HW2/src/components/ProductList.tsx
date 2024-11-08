@@ -21,6 +21,7 @@ interface ProductListProps {
 export const ProductList: React.FC<ProductListProps> = ({ isMenuVisible, toggleMenu }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
     useEffect(() => {
         fetch('/products.json')
@@ -37,11 +38,15 @@ export const ProductList: React.FC<ProductListProps> = ({ isMenuVisible, toggleM
         setSelectedProduct(null);
     };
 
+    const handleCategorySelect = (category: string) => {
+        setSelectedCategory(category);
+    }
+
     return (
         <div>
-            <SideMenu products={ products } isVisible={isMenuVisible} onClose={toggleMenu}/>
+            <SideMenu products={ products } isVisible={isMenuVisible} onClose={toggleMenu} handleCategorySelect={handleCategorySelect}/>
             <h1 style={{paddingLeft: '20px', marginLeft: isMenuVisible ? '300px' : '0', marginTop: isMenuVisible ? '110px' : '0px', transition: 'margin-left 0.3s ease-in-out'}}>Товары</h1>
-            <div className='product-list' style={{marginLeft: isMenuVisible ? '300px' : '20px'}}>
+            <div className='product-list' style={{marginLeft: isMenuVisible ? '320px' : '20px'}}>
                 {products.map((product, index) => (
                     <ProductCard
                         key={index}

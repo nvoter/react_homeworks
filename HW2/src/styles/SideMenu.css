@@ -1,61 +1,64 @@
 :root {
-  --background: #b3cbfb;
-  --accent: #94b6f7;
+  --background: linear-gradient(135deg, #b3cbfb, #94b6f7);
+  --accent: rgba(255, 255, 255, 0.3);
+  --field-background: rgba(255, 255, 255, 0.5);
+  --text-color: #3a3a3a;
+  --focused-text-color: #000000;
 }
-  
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #373e68;
-    --accent: #181861;
+    --background: linear-gradient(135deg, #373e68, #181861);
+    --text-color: #e0e0e0;
+    --focused-text-color: #ffffff;
   }
 }
 
 .side-menu {
   position: fixed;
-  top: 50px;
+  top: 72px;
   left: 0;
   width: 250px;
-  height: calc(100% - 50px);
-  background-color: var(--background);
+  height: calc(100% - 65px);
+  background: var(--background);
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 20px;
-  transition: transform 0.3s ease;
   transform: translateX(0);
+  transition: transform 0.3s ease;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  z-index: 1000;
 }
 
 .hidden {
-  transform: translateX(-200%);
+  transform: translateX(-100%);
 }
 
 .input-field {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  width: 90%;
+  color: var(--text-color);
+  background: var(--accent);
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.input-field:focus {
+  background: var(--field-background);
+  outline: none;
+  color: var(--focused-text-color);
 }
 
 .checkbox {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--text-color);
+  font-weight: 600;
   cursor: pointer;
-  accent-color: var(--accent);
-}
-
-.dropdown {
-  -webkit-appearance: none;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
-  position: relative; 
-  cursor: pointer;
-  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'><path d='M8 11L3 6l1.5-1.5L8 9.2 12.5 4.5 14 6z' fill='%23ccc'></path></svg>");
-  background-repeat: no-repeat;
-  background-position: right 5px;
+  accent-color: var(--focused-text-color);
 }
