@@ -36,7 +36,6 @@ const EditProductModal: React.FC<EditProductModalProps> = ({ open, onClose, prod
     price: false,
   });
 
-  // Загрузка категорий с бэкенда
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
@@ -108,7 +107,6 @@ const EditProductModal: React.FC<EditProductModalProps> = ({ open, onClose, prod
     try {
       const finalCategory = formValues.category.trim() || 'Без категории';
 
-      // Добавляем новую категорию, если она не существует
       if (!categories.includes(finalCategory)) {
         const categoryResponse = await fetch('http://localhost:5000/api/categories', {
           method: 'POST',
@@ -122,11 +120,9 @@ const EditProductModal: React.FC<EditProductModalProps> = ({ open, onClose, prod
           throw new Error('Не удалось добавить категорию');
         }
 
-        // Обновляем список категорий
         setCategories((prev) => [...prev, finalCategory]);
       }
 
-      // Обновляем продукт
       const productResponse = await fetch(`http://localhost:5000/api/products/${product.id}`, {
         method: 'PUT',
         headers: {

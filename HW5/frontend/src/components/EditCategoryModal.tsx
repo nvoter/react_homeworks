@@ -3,7 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } 
 import { toast } from 'react-toastify';
 
 interface Category {
-  id: number; // Предполагается, что ID категории - число
+  id: number;
   name: string;
 }
 

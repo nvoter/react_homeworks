@@ -33,9 +33,8 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, onClose }) => {
     unit: false,
     price: false,
   });
-  const [categories, setCategories] = useState<string[]>([]); // Список категорий
+  const [categories, setCategories] = useState<string[]>([]);
 
-  // Загрузка категорий с бэкенда
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -93,7 +92,6 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, onClose }) => {
     try {
       const finalCategory = formValues.category.trim() || 'Без категории';
 
-      // Добавляем новую категорию, если она не существует
       if (!categories.includes(finalCategory)) {
         const categoryResponse = await fetch('http://localhost:5000/api/categories', {
           method: 'POST',
@@ -112,11 +110,9 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, onClose }) => {
           const errorData = await categoryResponse.json();
           toast.error(`Ошибка при добавлении категории: ${errorData.error || 'Неизвестная ошибка'}`);
         }
-        // Обновляем список категорий
         setCategories((prev) => [...prev, finalCategory]);
       }
 
-      // Добавляем новый продукт
       const productResponse = await fetch('http://localhost:5000/api/products', {
         method: 'POST',
         headers: {

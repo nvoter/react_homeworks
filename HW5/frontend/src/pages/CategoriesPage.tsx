@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
 
 interface Category {
-  id: number; // Предполагается, что ID категории - число
+  id: number;
   name: string;
 }
 
@@ -30,12 +30,10 @@ const CategoriesPage: React.FC = () => {
     }
   };
 
-  // Загрузка категорий с бэкенда
   useEffect(() => {
     fetchCategories();
   }, []);
 
-  // Удаление категории
   const handleDeleteCategory = async (id: number) => {
     try {
       const response = await fetch(`http://localhost:5000/api/categories/${id}`, {
