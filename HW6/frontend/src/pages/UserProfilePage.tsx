@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, Avatar, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getAuthHeaders } from '../utils/getAuthHeaders';
+import { fetchData } from '../utils/fetchData';
 
 interface UserProfile {
   name: string;
@@ -15,7 +16,7 @@ const UserProfilePage: React.FC = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/auth/profile', {
+      const response = await fetchData('http://localhost:5001/api/auth/profile', {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -40,7 +41,7 @@ const UserProfilePage: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/auth/logout', {
+      const response = await fetchData('http://localhost:5001/api/auth/logout', {
         method: 'POST',
         credentials: 'include',
         headers: {

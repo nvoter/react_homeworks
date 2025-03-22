@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
 import { toast } from 'react-toastify';
 import { getAuthHeaders } from '../utils/getAuthHeaders';
+import { fetchData } from '../utils/fetchData';
 
 interface Category {
   id: number;
@@ -29,7 +30,7 @@ const EditCategoryModal: React.FC<EditCategoryModalProps> = ({ open, onClose, ca
     }
 
     try {
-      const response = await fetch(`http://localhost:5001/api/categories/${category.id}`, {
+      const response = await fetchData(`http://localhost:5001/api/categories/${category.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

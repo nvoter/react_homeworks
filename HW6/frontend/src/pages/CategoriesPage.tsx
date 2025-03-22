@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
 import { getAuthHeaders } from '../utils/getAuthHeaders';
+import { fetchData } from '../utils/fetchData';
 
 interface Category {
   id: number;
@@ -19,7 +20,7 @@ const CategoriesPage: React.FC = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/categories', {
+      const response = await fetchData('http://localhost:5001/api/categories', {
         headers: {
           'Content-Type': 'application/json',
           ...getAuthHeaders()
@@ -42,7 +43,7 @@ const CategoriesPage: React.FC = () => {
 
   const handleDeleteCategory = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:5001/api/categories/${id}`, {
+      const response = await fetchData(`http://localhost:5001/api/categories/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

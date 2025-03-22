@@ -5,6 +5,7 @@ import SideMenu from '../components/SideMenu';
 import AddProductModal from '../components/AddProductModal';
 import { Product } from '../types/types';
 import { getAuthHeaders } from '../utils/getAuthHeaders';
+import { fetchData } from '../utils/fetchData';
 
 const ProductListPage: React.FC = () => {
 
@@ -19,7 +20,7 @@ const ProductListPage: React.FC = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/products', {
+      const response = await fetchData('http://localhost:5001/api/products', {
         headers: {
           'Content-Type': 'application/json',
           ...getAuthHeaders()
@@ -57,7 +58,7 @@ const ProductListPage: React.FC = () => {
   }, [products, filters]);
 
   const handleDeleteProduct = (id: string) => {
-    fetch(`http://localhost:5001/api/products/${id}`, {
+    fetchData(`http://localhost:5001/api/products/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

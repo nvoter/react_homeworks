@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
 import { toast } from 'react-toastify';
 import { getAuthHeaders } from '../utils/getAuthHeaders';
+import { fetchData } from '../utils/fetchData';
 
 interface AddCategoryModalProps {
   open: boolean;
@@ -19,7 +20,7 @@ const AddCategoryModal: React.FC<AddCategoryModalProps> = ({ open, onClose }) =>
     }
 
     try {
-      const response = await fetch('http://localhost:5001/api/categories', {
+      const response = await fetchData('http://localhost:5001/api/categories', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { toast } from 'react-toastify';
 import { getAuthHeaders } from '../utils/getAuthHeaders';
+import { fetchData } from '../utils/fetchData';
 
 interface AddProductModalProps {
   open: boolean;
@@ -39,7 +40,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, onClose }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/categories', {
+        const response = await fetchData('http://localhost:5001/api/categories', {
           headers: {
             'Content-Type': 'application/json',
             ...getAuthHeaders()
@@ -99,7 +100,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, onClose }) => {
       const finalCategory = formValues.category.trim() || 'Без категории';
 
       if (!categories.includes(finalCategory)) {
-        const categoryResponse = await fetch('http://localhost:5001/api/categories', {
+        const categoryResponse = await fetchData('http://localhost:5001/api/categories', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, onClose }) => {
         setCategories((prev) => [...prev, finalCategory]);
       }
 
-      const productResponse = await fetch('http://localhost:5001/api/products', {
+      const productResponse = await fetchData('http://localhost:5001/api/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

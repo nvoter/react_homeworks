@@ -5,8 +5,8 @@ const { User, RefreshToken } = require('../models');
 const { Op } = require('sequelize');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret';
-const ACCESS_TOKEN_EXPIRES_IN = '1h';
-const REFRESH_TOKEN_EXPIRES_IN = '7d';
+const ACCESS_TOKEN_EXPIRES_IN = '1m';
+const REFRESH_TOKEN_EXPIRES_IN = 7 * 24 * 60 * 60 * 1000;
 
 const generateRefreshToken = () => {
   const token = crypto.randomBytes(64).toString('hex');
@@ -16,9 +16,6 @@ const generateRefreshToken = () => {
 
 exports.register = async (req, res, next) => {
   try {
-    console.log('***********************************');
-    console.log(req.body);
-    console.log('***********************************');
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
       return res.status(400).json({ error: 'Необходимо указать name, email и password' });
@@ -42,10 +39,6 @@ exports.register = async (req, res, next) => {
       user: { id: user.id, name: user.name, email: user.email, group: user.group }
     });
   } catch (error) {
-    console.log('***********************************');
-    console.log('error: ');
-    console.log(error.message);
-    console.log('***********************************');
     next(error);
   }
 };
@@ -79,10 +72,6 @@ exports.login = async (req, res, next) => {
     res.cookie('refreshToken', token, { httpOnly: true, secure: true });
     return res.json({ message: 'Успешный вход', accessToken, token });
   } catch (error) {
-    console.log('***********************************');
-    console.log('error: ');
-    console.log(error.message);
-    console.log('***********************************');
     next(error);
   }
 };
@@ -108,15 +97,23 @@ exports.refreshToken = async (req, res, next) => {
     if (!refreshToken) {
       return res.status(401).json({ error: 'Нет refresh токена' });
     }
+
     const tokenHash = crypto.createHash('sha256').update(refreshToken).digest('hex');
+    
     const storedToken = await RefreshToken.findOne({ where: { tokenHash } });
     if (!storedToken) {
       return res.status(401).json({ error: 'Неверный refresh токен' });
     }
+
+    if (new Date() - storedToken.createdAt > REFRESH_TOKEN_EXPIRES_IN) {
+      return res.status(401).json({ error: 'Refresh токен истек' });
+    }
+    
     const user = await User.findByPk(storedToken.userId);
     if (!user) {
       return res.status(401).json({ error: 'Пользователь не найден' });
     }
+    
     const newAccessToken = jwt.sign(
       { id: user.id, name: user.name, email: user.email, group: user.group, avatarUrl: user.avatarUrl },
       JWT_SECRET,

@@ -4,6 +4,7 @@ import { Box, Typography, Button } from '@mui/material';
 import EditProductModal from '../components/EditProductModal';
 import { Product } from '../types/types'
 import { getAuthHeaders } from '../utils/getAuthHeaders';
+import { fetchData } from '../utils/fetchData';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,7 +15,7 @@ const ProductDetailPage: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/products/${id}`, {
+        const response = await fetchData(`http://localhost:5001/api/products/${id}`, {
           headers: {
             'Content-Type': 'application/json',
             ...getAuthHeaders()
@@ -38,7 +39,7 @@ const ProductDetailPage: React.FC = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5001/api/products/${id}`, {
+      const response = await fetchData(`http://localhost:5001/api/products/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ const ProductDetailPage: React.FC = () => {
   const handleEditProductModalOnClose = () => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/products/${id}`, {
+        const response = await fetchData(`http://localhost:5001/api/products/${id}`, {
           headers: {
             'Content-Type': 'application/json',
             ...getAuthHeaders()
